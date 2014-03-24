@@ -4,13 +4,15 @@
 #include <ncurses.h>
 
 int row, col; /* These hold the size of the terminal window */
-char *welcome();
+char *welcome(void);
+int stage1_1(char *char_name, int current_score);
 
 int main() {
   char *char_name;
   char welc_msg[] = "Hello! Welcome to GitFuck!"; /* Initial welcome */
   char welc_continue[] = "Press any key to continue...";
-  
+  int score;
+
   initscr();
   
   getmaxyx(stdscr,row,col);
@@ -22,6 +24,9 @@ int main() {
   char_name = welcome();
   while(char_name == "error") /* As long as welcome() returns errors, */
     char_name = welcome();    /* main() will loop welcome()           */
+
+  score = 0;
+  stage1_1(char_name, score);
 
   endwin();
   return 0;
@@ -75,3 +80,85 @@ char *welcome() {
   }
 }
     
+int stage1_1(char *char_name, int current_score) {
+  char wake_up[] = "Wake up, ";
+  char in_bed[] = "You're in bed.";
+  char in_bed_next[] = "Right next to you lies your cousin.";
+  char in_bed_erection[] = "You have the weirdest boner for her.";
+  char in_bed_dick[] = "You can't control your penis for her anymore.";
+  char choice0_0[] = "CHOICE:";
+  char choice0_1[] = "A: Go in.";
+  char choice0_2[] = "B: Yell \"Lewd!\"";
+  char choice_result[] = "Your choice didn't matter.";
+  char awake1[] = "You are in a dream.";
+  char awake2[] = "You quickly realize you don't have a cousin.";
+  char awake3[] = "And that you are also not Japanese.";
+  char awake4[] = "And, in fact, you are three-dimensional.";
+
+  mvprintw(row / 2, ((col - strlen(char_name) - 5) / 2) , "\"%s!\"", char_name);
+  refresh();
+  getch();
+  clear();
+
+  mvprintw(row / 2, ((col - strlen(wake_up) - 7 - strlen(char_name))) / 2, "\"%s%s-chan\"", wake_up, char_name);
+  refresh();
+  getch();
+  clear();
+
+  mvprintw(row / 2, (col - strlen(in_bed)) / 2, "%s", in_bed);
+  refresh();
+  getch();
+  clear();
+
+  mvprintw(row / 2, (col - strlen(in_bed_next)) / 2, "%s", in_bed_next);
+  refresh();
+  getch();
+  clear();
+
+  mvprintw(row / 2, (col - strlen(in_bed_erection)) / 2, "%s", in_bed_erection);
+  refresh();
+  getch();
+  clear();
+
+  mvprintw(row / 2, (col - strlen(in_bed_dick)) / 2, "%s", in_bed_dick);
+  refresh();
+  getch();
+  clear();
+
+  mvprintw(row / 2, (col - strlen(choice0_0)) / 2, "%s", choice0_0);
+  attron(A_BOLD);
+  mvprintw((row / 2) + 1, (col - strlen(choice0_1)) / 2, "%s", choice0_1);
+  mvprintw((row / 2) + 2, (col - strlen(choice0_2)) / 2, "%s", choice0_2);
+  attroff(A_BOLD);
+  refresh();
+  getch();
+  clear();
+  current_score++;
+
+  mvprintw(row / 2, (col - strlen(choice_result)) / 2, "%s", choice_result);
+  refresh();
+  getch();
+  clear();
+    
+  mvprintw(row / 2, (col - strlen(awake1)) / 2, "%s", awake1);
+  refresh();
+  getch();
+  clear();
+  
+  mvprintw(row / 2, (col - strlen(awake2)) / 2, "%s", awake2);
+  refresh();
+  getch();
+  clear();
+  
+  mvprintw(row / 2, (col - strlen(awake3)) / 2, "%s", awake3);
+  refresh();
+  getch();
+  clear();
+
+  mvprintw(row / 2, (col - strlen(awake4)) / 2, "%s", awake4);
+  refresh();
+  getch();
+  clear();
+
+  return current_score;
+}
