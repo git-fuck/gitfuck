@@ -10,6 +10,7 @@ void ending(int score);
 void next(void);
 void stage1_1a(void);
 void qtemarking(void);
+void centermsg(char message[], int row_offset, int col_offset);
 
 int main() {
   char *char_name;
@@ -20,8 +21,8 @@ int main() {
   initscr();
   
   getmaxyx(stdscr,row,col);
-  mvprintw(row / 2, (col - strlen(welc_msg))/2,"%s", welc_msg); /* Initial welcome to Git Fuck */
-  mvprintw((row / 2) + 1, (col - strlen(welc_continue)) / 2, "%s", welc_continue);
+  centermsg(welc_msg, 0, 0); /* Initial welcome to Git Fuck */
+  centermsg(welc_continue, 1, 0);
   refresh();
   getch(); /* Wait for user input before continuing */
 
@@ -77,7 +78,7 @@ char *welcome() {
     return char_name; /* hands it back to main(), if not */
   else {              /* then returns "error" to main()  */
     clear();
-    mvprintw(row / 2, (col - strlen(bad_name)) / 2, "%s\n", bad_name);
+    centermsg(bad_name, 0, 0);
     refresh();
     sleep(1);
     clear();
@@ -140,57 +141,56 @@ int stage1_1(char *char_name) {
   mvprintw(row / 2, ((col - strlen(wake_up) - 7 - strlen(char_name))) / 2, "\"%s%s-chan\"", wake_up, char_name);
   next();
 
-  mvprintw(row / 2, (col - strlen(emotion_bad)) / 2, "%s", emotion_bad);
+  centermsg(emotion_bad, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(in_bed)) / 2, "%s", in_bed);
+  centermsg(in_bed, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(in_bed_next)) / 2, "%s", in_bed_next);
+  centermsg(in_bed_next, 0, 0);
   next();
 
   mvprintw(row / 2, (col - strlen(cousin_ask) - 8) / 2, "\"%s%s-chan?\"", cousin_ask, char_name);
   next();
 
-  mvprintw(row / 2, (col - strlen(in_bed_erection)) / 2, "%s", in_bed_erection);
+  centermsg(in_bed_erection, 0, 0);
   next();
 
   mvprintw(row / 2, (col - strlen(in_bed_cousin_kawaii) - 8) / 2, "\"%s%s-chan~\"", in_bed_cousin_kawaii, char_name);
   next();
 
-  mvprintw(row / 2, (col - strlen(in_bed_dick)) / 2, "%s", in_bed_dick);
-  next();
+  centermsg(in_bed_dick, 0, 0);
 
-  mvprintw(row / 2, (col - strlen(choice0_0)) / 2, "%s", choice0_0);
+  mvprintw((row / 2) - 1, (col - strlen(choice0_0)) / 2, "%s", choice0_0); /* Change to normal! */
   attron(A_BOLD);
-  mvprintw((row / 2) + 1, (col - strlen(choice0_1)) / 2, "%s", choice0_1);
-  mvprintw((row / 2) + 2, (col - strlen(choice0_2)) / 2, "%s", choice0_2);
+  mvprintw(row / 2, (col - strlen(choice0_1)) / 2, "%s", choice0_1);
+  mvprintw((row / 2) + 1, (col - strlen(choice0_2)) / 2, "%s", choice0_2);
   attroff(A_BOLD);
   next();
   current_score++;
 
-  mvprintw(row / 2, (col - strlen(choice_result)) / 2, "%s", choice_result);
+  centermsg(choice_result, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(awake1)) / 2, "%s", awake1);
+  centermsg(awake1, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(awake2)) / 2, "%s", awake2);
+  centermsg(awake2, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(awake3)) / 2, "%s", awake3);
+  centermsg(awake3, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(awake4)) / 2, "%s", awake4);
+  centermsg(awake4, 0, 0);
   next();
-  
-  mvprintw(row / 2, (col - strlen(awake5)) / 2, "%s", awake5);
+
+  centermsg(awake5, 0, 0);
   next();
-  
-  mvprintw(row / 2, (col - strlen(awake6)) / 2, "%s", awake6);
+
+  centermsg(awake6, 0, 0);
   next();
-  
-  mvprintw(row / 2, (col - strlen(what_the_fuck_am_I_invoking)) / 2, "%s", what_the_fuck_am_I_invoking);
+
+  centermsg(what_the_fuck_am_I_invoking, 0, 0);
   next();
 
   mvprintw((row / 2) - 1, (col - strlen(choice0_0)) / 2, "%s", choice0_0);
@@ -205,57 +205,57 @@ int stage1_1(char *char_name) {
   else
     current_score++;
 
-  mvprintw((row / 2) - 1, (col - strlen(get_on_pc1)) / 2, "%s", get_on_pc1);
-  mvprintw(row / 2, (col - strlen(get_on_pc2)) / 2, "%s", get_on_pc2);
-  mvprintw((row / 2) + 1, (col - strlen(get_on_pc3)) / 2, "%s", get_on_pc3);
+  centermsg(get_on_pc1, -1, 0);
+  centermsg(get_on_pc2, 0, 0);
+  centermsg(get_on_pc3, 1, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(start_work)) / 2, "%s", start_work);
+  centermsg(start_work, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(work_however)) / 2, "%s", work_however);
+  centermsg(work_however, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(calm)) / 2, "%s", calm);
+  centermsg(calm, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(DESKTOP_THREAD)) / 2, "%s", DESKTOP_THREAD);
+  centermsg(DESKTOP_THREAD, 0 ,0);
   next();
 
-  mvprintw((row / 2) - 1, (col - strlen(laugh1)) / 2, "%s", laugh1);
-  mvprintw(row / 2, (col - strlen(laugh2)) / 2, "%s", laugh2);
-  mvprintw((row / 2) + 1, (col - strlen(laugh3)) / 2, "%s", laugh3);
+  centermsg(laugh1, -1, 0);
+  centermsg(laugh2, 0, 0);
+  centermsg(laugh3, 1, 0);
   next(); 
 
-  mvprintw(row / 2, (col - strlen(THE_BUZZ_OF_STROKES)) / 2, "%s", THE_BUZZ_OF_STROKES);
+  centermsg(THE_BUZZ_OF_STROKES, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(guess_what)) / 2, "%s", guess_what);
+  centermsg(guess_what, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(how_sad)) / 2, "%s", how_sad);
-  mvprintw((row / 2) + 1, (col - strlen(how_bad)) / 2, "%s", how_bad);
+  centermsg(how_sad, -1, 0);
+  centermsg(how_bad, 0, 0);
   next();
 
-  mvprintw((row / 2) - 1, (col - strlen(get_clothes)) / 2, "%s", get_clothes);
-  mvprintw(row / 2, (col - strlen(cant_open)) / 2, "%s", cant_open);
+  centermsg(get_clothes, -1, 0);
+  centermsg(cant_open, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(cumming)) / 2, "%s", cumming);
+  centermsg(cumming, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(OOB)) / 2, "%s", OOB);
+  centermsg(OOB, 0, 0);
   next();
   
-  mvprintw(row / 2, (col - strlen(gtk)) / 2, "%s", gtk);
+  centermsg(gtk, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(package)) / 2, "%s", package);
+  centermsg(package, 0, 0);
   next();
 
   qtemarking();
   attron(A_BOLD);
-  mvprintw(row / 2, (col - strlen(qte1_1)) / 2, "%s", qte1_1);
+  centermsg(qte1_1, 0, 0);
   attroff(A_BOLD);
   timeout(1000); /* Waits 1s for the user before continuing */
   noecho();
@@ -265,12 +265,12 @@ int stage1_1(char *char_name) {
   echo();
 
   if(qte1 == -1) {
-    mvprintw(row / 2, (col - strlen(qte_death)) / 2, "%s", qte_death);
+    centermsg(qte_death, 0, 0);
     next();
     ending(0);
   }
-  
-  mvprintw(row / 2, (col - strlen(survival)) / 2, "%s", survival);
+
+  centermsg(survival, 0, 0);
   next();
 
   return current_score;
@@ -280,17 +280,12 @@ void ending(int score) {
   char final_score[] = "Final score: ";
 
   clear();
-  mvprintw((row / 2) - 1, (col - strlen(game_over)) / 2 , "%s!", game_over);
+  centermsg(game_over, -1, 0);
   mvprintw(row / 2, (col - strlen(final_score) - 3) / 2, "%s%i", final_score, score);
   refresh();
   getch();
   endwin();
   exit(0);
-}
-void next(void) {
-  refresh();
-  getch();
-  clear();
 }
 void stage1_1a(void) {
   char you_do_it[] = "You pick up some of your clothes, put them on and tidy up.";
@@ -300,15 +295,16 @@ void stage1_1a(void) {
   char stroke[] = "You get a stroke and die.";
   
   clear();
-  mvprintw(row / 2, (col - strlen(you_do_it)) / 2, "%s", you_do_it);
+  centermsg(you_do_it, 0, 0);
   next();
 
-  mvprintw((row / 2) - 1, (col - strlen(before_pc)) / 2, "%s", before_pc);
-  mvprintw(row / 2, (col - strlen(bell_ring)) / 2, "%s", bell_ring);
+  centermsg(before_pc, -1, 0);
+  centermsg(bell_ring, 0, 0);
   next();
 
-  mvprintw(row / 2, (col - strlen(stroke)) / 2, "%s", stroke);
+  centermsg(stroke, 0, 0);
   next();
+
   int score = 0;
   ending(score);
 }
@@ -320,4 +316,12 @@ void qtemarking(void) {
   mvprintw(row - 1, 0, "%s", qte);
   mvprintw(row - 1, col - strlen(qte), "%s", qte);
   attroff(A_BOLD);
+}
+void next(void) { 
+  refresh();
+  getch();
+  clear();
+}
+void centermsg(char message[], int row_offset, int col_offset) {
+  mvprintw((row / 2) + row_offset, (col - strlen(message) - col_offset) / 2, "%s", message);
 }
