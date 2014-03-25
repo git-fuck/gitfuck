@@ -4,12 +4,12 @@
 #include <ncurses.h>
 
 int row, col; /* These hold the size of the terminal window */
-char *welcome(void);
-int stage1_1(char *char_name);
-void ending(int score);
-void next(void);
+char *welcome(void); /* Welcomes the user to gitfuck and gets a name */
+int stage1_1(char *char_name); /* Initial stage */
+void ending(int score); /* Takes the score and ends everyone's life */
+void next(void); /* Used to speed up writing for the programmer */
 void stage1_1a(void);
-void qtemarking(void);
+void qtemarking(void); /* Warns user of the danger ahead */
 void centermsg(char message[], int row_offset, int col_offset);
 
 int main() {
@@ -193,7 +193,7 @@ int stage1_1(char *char_name) {
   centermsg(what_the_fuck_am_I_invoking, 0, 0);
   next();
 
-  mvprintw((row / 2) - 1, (col - strlen(choice0_0)) / 2, "%s", choice0_0);
+  mvprintw((row / 2) - 1, (col - strlen(choice0_0)) / 2, "%s", choice0_0); /* EROBE! */
   attron(A_BOLD);
   mvprintw(row / 2, (col - strlen(choice1_1)) / 2, "%s", choice1_1);
   mvprintw((row / 2) + 1, (col - strlen(choice1_2)) / 2, "%s", choice1_2);
@@ -284,7 +284,7 @@ void ending(int score) {
   mvprintw(row / 2, (col - strlen(final_score) - 3) / 2, "%s%i", final_score, score);
   refresh();
   getch();
-  endwin();
+  endwin(); /* This kills the ncurses */
   exit(0);
 }
 void stage1_1a(void) {
