@@ -97,18 +97,37 @@ int stage1_1(char *char_name) {
   char choice0_0[] = "CHOICE:";
   char choice0_1[] = "A: Gather yourself and defeat your primal instincts.";
   char choice0_2[] = "B: Say \"My hips are moving on their own!\"";
-  char choice_result[] = "Your choice didn't matter.";
+  char choice_result[] = "Your choices don't matter.";
   char awake1[] = "You are in a dream.";
   char awake2[] = "You quickly realize you don't have a cousin.";
   char awake3[] = "And that you are also not Japanese.";
-  char awake4[] = "And, in fact, you are three-dimensional.";
+  char awake4[] = "In fact, you are three-dimensional.";
   char awake5[] = "You wake up.";
   char awake6[] = "It's 2PM on a saturday.";
   char what_the_fuck_am_I_invoking[] = "\"What the fuck was I dreaming?\" you mutter to yourself as you turn on your battlestation.";
   char choice1_1[] = "A: Put some clothes on and clean up.";
   char choice1_2[] = "B: Do nothing.";
   char choice1;
-
+  char get_on_pc1[] = "You didn't even manage to put on underwear and your self-built \"battlestation\"";
+  char get_on_pc2[] = "with an optimized kernel, bootloader and init daemon already booted up and restored";
+  char get_on_pc3[] = "your last browser session and connected to your favorite IRC channels.";
+  char start_work[] = "After you finished making a big mug of coffee, you can start to \"work\".";
+  char work_however[] = "However, your \"work\" is nothing but browse your favorite imageboard.";
+  char DESKTOP_THREAD[] = "The thread about posting screenshots of your desktop is still up.";
+  char calm[] = "\"Ah.\"";
+  char laugh1[] = "You remember how much fun you had laughing at other people's";
+  char laugh2[] = "shitty desktops who used proprietary operating systems last night";
+  char laugh3[] = "as you read the new things posted while you were asleep.";
+  char THE_BUZZ_OF_STROKES[] = "You hear a loud buzz";
+  char guess_what[] = "It's your doorbell, dimwit.";
+  char how_sad[] = "You realize you do not remember the sound of";
+  char how_bad[] = "your doorbell since nobody ever visits you.";
+  char get_clothes[] = "You quickly stand up and search the ground for clothes";
+  char cant_open[] = "You can't open the door while wearing just your underwear.";
+  char cumming[] = "You yell \"I'm coming!\" as you walk downstairs.";
+  char OOB[] = "Almost out of breath you open the door.";
+  char gtk[] = "It's a cute Asian girl.";
+  char package[] = "\"Hello! I have a package for you!\" She says while smiling.";
   mvprintw(row / 2, ((col - strlen(char_name) - 5) / 2) , "\"%s!\"", char_name);
   next();
 
@@ -179,6 +198,54 @@ int stage1_1(char *char_name) {
     stage1_1a();
   else
     current_score++;
+
+  mvprintw((row / 2) - 1, (col - strlen(get_on_pc1)) / 2, "%s", get_on_pc1);
+  mvprintw(row / 2, (col - strlen(get_on_pc2)) / 2, "%s", get_on_pc2);
+  mvprintw((row / 2) + 1, (col - strlen(get_on_pc3)) / 2, "%s", get_on_pc3);
+  next();
+
+  mvprintw(row / 2, (col - strlen(start_work)) / 2, "%s", start_work);
+  next();
+
+  mvprintw(row / 2, (col - strlen(work_however)) / 2, "%s", work_however);
+  next();
+
+  mvprintw(row / 2, (col - strlen(calm)) / 2, "%s", calm);
+  next();
+
+  mvprintw(row / 2, (col - strlen(DESKTOP_THREAD)) / 2, "%s", DESKTOP_THREAD);
+  next();
+
+  mvprintw((row / 2) - 1, (col - strlen(laugh1)) / 2, "%s", laugh1);
+  mvprintw(row / 2, (col - strlen(laugh2)) / 2, "%s", laugh2);
+  mvprintw((row / 2) + 1, (col - strlen(laugh3)) / 2, "%s", laugh3);
+  next(); 
+
+  mvprintw(row / 2, (col - strlen(THE_BUZZ_OF_STROKES)) / 2, "%s", THE_BUZZ_OF_STROKES);
+  next();
+
+  mvprintw(row / 2, (col - strlen(guess_what)) / 2, "%s", guess_what);
+  next();
+
+  mvprintw(row / 2, (col - strlen(how_sad)) / 2, "%s", how_sad);
+  mvprintw((row / 2) + 1, (col - strlen(how_bad)) / 2, "%s", how_bad);
+  next();
+
+  mvprintw((row / 2) - 1, (col - strlen(get_clothes)) / 2, "%s", get_clothes);
+  mvprintw(row / 2, (col - strlen(cant_open)) / 2, "%s", cant_open);
+  next();
+
+  mvprintw(row / 2, (col - strlen(cumming)) / 2, "%s", cumming);
+  next();
+
+  mvprintw(row / 2, (col - strlen(OOB)) / 2, "%s", OOB);
+  next();
+  
+  mvprintw(row / 2, (col - strlen(gtk)) / 2, "%s", gtk);
+  next();
+
+  mvprintw(row / 2, (col - strlen(package)) / 2, "%s", package);
+  next();
 
   return current_score;
 }
