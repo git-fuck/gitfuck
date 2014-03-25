@@ -9,6 +9,7 @@ int stage1_1(char *char_name);
 void ending(int score);
 void next(void);
 void stage1_1a(void);
+void qtemarking(void);
 
 int main() {
   char *char_name;
@@ -128,6 +129,11 @@ int stage1_1(char *char_name) {
   char OOB[] = "Almost out of breath you open the door.";
   char gtk[] = "It's a cute Asian girl.";
   char package[] = "\"Hello! I have a package for you!\" She says while smiling.";
+  char qte1;
+  char qte1_1[] = "PRESS H TO NOT DIE!";
+  char qte_death[] = "You died.";
+  char survival[] = "\"Y-you too\" you reply without thinking.";
+
   mvprintw(row / 2, ((col - strlen(char_name) - 5) / 2) , "\"%s!\"", char_name);
   next();
 
@@ -247,6 +253,26 @@ int stage1_1(char *char_name) {
   mvprintw(row / 2, (col - strlen(package)) / 2, "%s", package);
   next();
 
+  qtemarking();
+  attron(A_BOLD);
+  mvprintw(row / 2, (col - strlen(qte1_1)) / 2, "%s", qte1_1);
+  attroff(A_BOLD);
+  timeout(1000); /* Waits 1s for the user before continuing */
+  noecho();
+  qte1 = getch();
+  next();
+  timeout(-1); /* Restores normal time */
+  echo();
+
+  if(qte1 == -1) {
+    mvprintw(row / 2, (col - strlen(qte_death)) / 2, "%s", qte_death);
+    next();
+    ending(0);
+  }
+  
+  mvprintw(row / 2, (col - strlen(survival)) / 2, "%s", survival);
+  next();
+
   return current_score;
 }
 void ending(int score) {
@@ -285,4 +311,13 @@ void stage1_1a(void) {
   next();
   int score = 0;
   ending(score);
+}
+void qtemarking(void) {
+  char qte[] =  "QUICK TIME EVENT!";
+  attron(A_BOLD);
+  mvprintw(0, 0, "%s", qte);
+  mvprintw(0, col - strlen(qte), "%s", qte);
+  mvprintw(row - 1, 0, "%s", qte);
+  mvprintw(row - 1, col - strlen(qte), "%s", qte);
+  attroff(A_BOLD);
 }
