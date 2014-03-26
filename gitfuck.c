@@ -9,6 +9,7 @@ int stage1_1(char *char_name); /* Initial stage */
 void ending(int score); /* Takes the score and ends everyone's life */
 void next(void); /* Used to speed up writing for the programmer */
 void stage1_1a(void);
+int stage1_2(char *char_name);
 void qtemarking(void); /* Warns user of the danger ahead */
 void centermsg(char message[], int row_offset, int col_offset);
 
@@ -134,6 +135,16 @@ int stage1_1(char *char_name) {
   char qte1_1[] = "PRESS H TO NOT DIE!";
   char qte_death[] = "You died.";
   char survival[] = "\"Y-you too\" you reply without thinking.";
+  char hands[] = "She hands you the package.";
+  char thanks[] = "\"Thanks bud! Toppy day!\" you say in a retarded voice";
+  char oh_anon[] = "\"Oh, ";
+  char you_cute[] = ", you're so cute, hehe.\" she giggles.";
+  char how_do[] = "How does she know your name?";
+  char choice2_1[] = "A: \"I cannot wait. I must fuck you here and now!\"";
+  char choice2_2[] = "B: \"So we gun fuck?\"";
+  char choice2_3[] = "C: \"How the fuck do you know my name?\"";
+  char retard[] = "You are so retarded you can't pick. So I did. C."; 
+  char choice2;
 
   mvprintw(row / 2, ((col - strlen(char_name) - 5) / 2) , "\"%s!\"", char_name);
   next();
@@ -273,6 +284,41 @@ int stage1_1(char *char_name) {
   centermsg(survival, 0, 0);
   next();
 
+  centermsg(hands, 0, 0);
+  next();
+
+  centermsg(thanks, 0, 0);
+  next();
+  
+  mvprintw(row / 2, (col - strlen(oh_anon) - strlen(char_name) - strlen(you_cute)) / 2, "%s%s%s", oh_anon, char_name, you_cute);
+  next();
+
+  centermsg(how_do, 0, 0);
+  next();
+
+  centermsg(choice0_0, -2, 0);
+  attron(A_BOLD);
+  centermsg(choice2_1, -1, 0);
+  centermsg(choice2_2, 0, 0);
+  centermsg(choice2_3, 1, 0);
+  attroff(A_BOLD);
+  refresh();
+  choice2 = getch();
+
+  if((choice2 == 'C') || (choice2 == 'c')) 
+   current_score += stage1_2(char_name);
+  else if((choice2 == 'A') || (choice2 == 'a'))
+    centermsg(choice2_1, 0, 0);
+  else if((choice2 == 'B') || (choice2 == 'b'))
+    centermsg(choice2_2, 0, 0);
+  else {
+    clear();
+    centermsg(retard, 0, 0);
+    next();
+    current_score += stage1_2(char_name) + 1;
+  }
+  next();
+  
   return current_score;
 }
 void ending(int score) {
@@ -324,4 +370,120 @@ void next(void) {
 }
 void centermsg(char message[], int row_offset, int col_offset) {
   mvprintw((row / 2) + row_offset, (col - strlen(message) - col_offset) / 2, "%s", message);
+}
+int stage1_2(char *char_name) {
+  int stage_score = 0;
+
+  char the_question[] = "\"Excuse me, how do you know my name?\"";
+  char suspence1[] = "You see a rabbit behind her.";
+  char suspence2[] = "It has gray fur.";
+  char suspence3[] = "I like rabbits, do you?";
+  char suspence4[] = "No, you don't. You hate everything.";
+  char suspence5[] = "You should go out more instead of arguing on the internet.";
+  char suspence6[] = "But you never will, you loser.";
+  char suspence7[] = "All I ever see you do is wank to chinese cartoons.";
+  char suspence8[] = "Anyways.";
+  char suspence9[] = "The rabbit.";
+  char suspence10[] = "It's fucking another rabbit.";
+  char suspence11[] = "That's a whole lot more action than I'll ever see from you.";
+  char suspence12[] = "Oh, right. Time.";
+  char suspence13[] = "(Time now passes at normal speed)";
+  char suspence14[] = "\"Well...\"";
+  char suspence15[] = "GOTCHA!";
+  char suspence16[] = "You thought that was her, talking. Hah. Rubbish.";
+  char suspence17[] = "You're a fucking idiot.";
+  char suspence18[] = "What did you order, anyways?";
+  char suspence19[] = "Another dragon dildo?";
+  char suspence20[] = "[Narrator sighs.]";
+  char suspence21[] = "Looks like she's ready to speak. About time.";
+  char suspence22[] = "Dinner's almost ready.";
+  char suspence23[] = "Wonder what ur mum cooked today";
+  char suspence24[] = "Exort Exort Quas!";
+  char suspence25[] = "Stop invoking.";
+  char the_answer[] = "\"I...\" SHE FINALLY SAYS SOMETHING. OH WOW. IT'S FUCKING NOTHING.";
+
+  clear();
+  centermsg(the_question, 0, 0);
+  next();
+  
+  centermsg(suspence1, 0, 0);
+  next();
+
+  centermsg(suspence2, 0, 0);
+  next();
+
+  centermsg(suspence3, 0, 0);
+  next();
+
+  centermsg(suspence4, 0, 0);
+  next();
+
+  centermsg(suspence5, 0, 0);
+  next();
+
+  centermsg(suspence6, 0, 0);
+  next();
+
+  centermsg(suspence7, 0, 0);
+  next();
+
+  centermsg(suspence8, 0, 0);
+  next();
+
+  centermsg(suspence9, 0, 0);
+  next();
+  
+  centermsg(suspence2, 0, 0);
+  next();
+
+  centermsg(suspence10, 0, 0);
+  next();
+
+  centermsg(suspence11, 0, 0);
+  next();
+
+  centermsg(suspence12, 0, 0);
+  next();
+
+  centermsg(suspence13, 0, 0);
+  next();
+
+  centermsg(suspence14, 0, 0);
+  next();
+
+  centermsg(suspence15, 0, 0);
+  next();
+
+  centermsg(suspence16, 0, 0);
+  next();
+
+  centermsg(suspence17, 0, 0);
+  next();
+
+  centermsg(suspence18, 0, 0);
+  next();
+
+  centermsg(suspence19, 0, 0);
+  next();
+
+  centermsg(suspence20, 0, 0);
+  next();
+
+  centermsg(suspence21, 0, 0);
+  next();
+
+  centermsg(suspence22, 0, 0);
+  next();
+
+  centermsg(suspence23, 0, 0);
+  next();
+
+  centermsg(suspence24, 0, 0);
+  next();
+
+  centermsg(suspence25, 0, 0);
+  next();
+
+  centermsg(the_answer, 0, 0);
+  next();
 }
