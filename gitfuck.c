@@ -2,9 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ncurses.h>
+#include <unistd.h>
 
 int row, col; /* These hold the size of the terminal window */
-char *welcome(void); /* Welcomes the user to gitfuck and gets a name */
+void welcome(char *char_name); /* Welcomes the user to gitfuck and gets a name */
 int stage1_1(char *char_name); /* Initial stage */
 void ending(int score); /* Takes the score and ends everyone's life */
 void next(void); /* Used to speed up writing for the programmer */
@@ -14,22 +15,22 @@ void qtemarking(void); /* Warns user of the danger ahead */
 void centermsg(char message[], int row_offset, int col_offset);
 
 int main() {
-  char *char_name;
+  char char_name[25]; /* The name of the character */
   char welc_msg[] = "Hello! Welcome to GitFuck!"; /* Initial welcome */
   char welc_continue[] = "Press any key to continue...";
   int score;
 
   initscr();
-  
+
   getmaxyx(stdscr,row,col);
   centermsg(welc_msg, 0, 0); /* Initial welcome to Git Fuck */
   centermsg(welc_continue, 1, 0);
   refresh();
   getch(); /* Wait for user input before continuing */
 
-  char_name = welcome();
-  while(char_name == "error") /* As long as welcome() returns errors, */
-    char_name = welcome();    /* main() will loop welcome()           */
+  welcome(char_name);
+  while(!strcmp(char_name, "error")) /* As long as welcome() returns errors, */
+    welcome(char_name);              /* main() will loop welcome()           */
 
   score = 0;
   score += stage1_1(char_name);
@@ -38,14 +39,14 @@ int main() {
 
   return 0;
 }
-char *welcome() {
-  char *char_name; /* The name of the character */
+
+void welcome(char *char_name) {
   char name_confirm; /* Confirmation for the name [Y/N] */
   char *return_err = "error"; /* The return if name is invalid */
   int row, col, name_valid; /* Initial set for window sizes and name validity */
   char ask_name[] = "What's your name?"; /* These three are self explanitory */
   char ask_name_confirm[] = "Is your name";
-  char bad_name[] = "Name is invalid."; 
+  char bad_name[] = "Name is invalid.";
 
   getmaxyx(stdscr,row,col);
   clear();
@@ -56,11 +57,11 @@ char *welcome() {
   refresh();
   scanw("%s", char_name);
   clear();
-  
+
   mvprintw(row / 2, ((col - strlen(ask_name_confirm)) / 2) - strlen (char_name + 1), "%s ", ask_name_confirm);
   printw("%s?", char_name);
   /* These last functions ask if the character's name is right */
-  
+
   refresh();
   name_confirm = getch();
   clear();
@@ -74,19 +75,20 @@ char *welcome() {
     name_valid = 0;
   /* This if-block checks the answer and sets the validity */
   /* variable of the name accordingly with the choice.     */
-  
+
   if(name_valid)      /* If the name is valid, welcome() */
-    return char_name; /* hands it back to main(), if not */
+    return;           /* hands it back to main(), if not */
   else {              /* then returns "error" to main()  */
     clear();
     centermsg(bad_name, 0, 0);
     refresh();
     sleep(1);
     clear();
-    return return_err;
+    strcpy(char_name, return_err);
+    return;
   }
 }
-    
+
 int stage1_1(char *char_name) {
   int current_score = 0;
   char wake_up[] = "Wake up, ";
@@ -143,7 +145,7 @@ int stage1_1(char *char_name) {
   char choice2_1[] = "A: \"I cannot wait. I must fuck you here and now!\"";
   char choice2_2[] = "B: \"So we gun fuck?\"";
   char choice2_3[] = "C: \"How the fuck do you know my name?\"";
-  char retard[] = "You are so retarded you can't pick. So I did. C."; 
+  char retard[] = "You are so retarded you can't pick. So I did. C.";
   char choice2;
 
   mvprintw(row / 2, ((col - strlen(char_name) - 5) / 2) , "\"%s!\"", char_name);
@@ -236,7 +238,7 @@ int stage1_1(char *char_name) {
   centermsg(laugh1, -1, 0);
   centermsg(laugh2, 0, 0);
   centermsg(laugh3, 1, 0);
-  next(); 
+  next();
 
   centermsg(THE_BUZZ_OF_STROKES, 0, 0);
   next();
@@ -257,7 +259,7 @@ int stage1_1(char *char_name) {
 
   centermsg(OOB, 0, 0);
   next();
-  
+
   centermsg(gtk, 0, 0);
   next();
 
@@ -289,7 +291,7 @@ int stage1_1(char *char_name) {
 
   centermsg(thanks, 0, 0);
   next();
-  
+
   mvprintw(row / 2, (col - strlen(oh_anon) - strlen(char_name) - strlen(you_cute)) / 2, "%s%s%s", oh_anon, char_name, you_cute);
   next();
 
@@ -305,7 +307,7 @@ int stage1_1(char *char_name) {
   refresh();
   choice2 = getch();
 
-  if((choice2 == 'C') || (choice2 == 'c')) 
+  if((choice2 == 'C') || (choice2 == 'c'))
    current_score += stage1_2(char_name);
   else if((choice2 == 'A') || (choice2 == 'a'))
     centermsg(choice2_1, 0, 0);
@@ -318,7 +320,7 @@ int stage1_1(char *char_name) {
     current_score += stage1_2(char_name) + 1;
   }
   next();
-  
+
   return current_score;
 }
 void ending(int score) {
@@ -339,7 +341,7 @@ void stage1_1a(void) {
   char bell_ring[] = "you hear a strange buzzing noise.";
   char the_secret[] = "It's your doorbell.";
   char stroke[] = "You get a stroke and die.";
-  
+
   clear();
   centermsg(you_do_it, 0, 0);
   next();
@@ -363,7 +365,7 @@ void qtemarking(void) {
   mvprintw(row - 1, col - strlen(qte), "%s", qte);
   attroff(A_BOLD);
 }
-void next(void) { 
+void next(void) {
   refresh();
   getch();
   clear();
@@ -405,7 +407,7 @@ int stage1_2(char *char_name) {
   clear();
   centermsg(the_question, 0, 0);
   next();
-  
+
   centermsg(suspence1, 0, 0);
   next();
 
@@ -432,7 +434,7 @@ int stage1_2(char *char_name) {
 
   centermsg(suspence9, 0, 0);
   next();
-  
+
   centermsg(suspence2, 0, 0);
   next();
 
